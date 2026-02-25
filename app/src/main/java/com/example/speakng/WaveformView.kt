@@ -11,12 +11,6 @@ import android.view.View
 import kotlin.math.sin
 import kotlin.random.Random
 
-/**
- * WaveformView
- *
- * A custom View that displays an animated audio waveform
- * while eSpeak NG is synthesizing / playing audio.
- */
 class WaveformView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -24,24 +18,22 @@ class WaveformView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val barCount   = 32
-    private val barWidth   = 8f
-    private val barGap     = 4f
-    private val cornerRad  = 4f
+    private val barCount  = 32
+    private val barWidth  = 8f
+    private val barGap    = 4f
+    private val cornerRad = 4f
 
-    private var animating  = false
-    private var tick       = 0f
+    private var animating = false
+    private var tick      = 0f
 
-    // Bar heights (0f–1f, normalized)
-    private val heights    = FloatArray(barCount) { 0.05f }
-    private val targetH    = FloatArray(barCount) { 0.05f }
+    private val heights = FloatArray(barCount) { 0.05f }
+    private val targetH = FloatArray(barCount) { 0.05f }
 
-    private val updateRunnable = Runnable {
+    // ── Fix: declare as Runnable explicitly so Kotlin 2.0 doesn't recurse ──
+    private val updateRunnable: Runnable = Runnable {
         tick += 0.15f
         for (i in 0 until barCount) {
-            // Smooth interpolation toward target
             heights[i] += (targetH[i] - heights[i]) * 0.3f
-            // Randomize target when animating
             if (animating) {
                 val wave = (sin(tick + i * 0.4f) * 0.3f + 0.5f).toFloat()
                 targetH[i] = wave * Random.nextFloat().coerceAtLeast(0.2f)
@@ -63,13 +55,12 @@ class WaveformView @JvmOverloads constructor(
 
     fun stopAnimation() {
         animating = false
-        // Let bars settle to zero naturally via updateRunnable
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        val w = width.toFloat()
-        val h = height.toFloat()
+        val w  = width.toFloat()
+        val h  = height.toFloat()
         val cx = w / 2f
 
         val totalWidth = barCount * (barWidth + barGap) - barGap
@@ -81,7 +72,6 @@ class WaveformView @JvmOverloads constructor(
             val top  = (h - barH) / 2f
             val bot  = top + barH
 
-            // Gradient: purple → cyan
             paint.shader = LinearGradient(
                 x, top, x, bot,
                 Color.parseColor("#7c3aed"),
