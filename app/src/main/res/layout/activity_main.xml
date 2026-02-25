@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- ── Header ── -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="eSpeak NG"
+                android:textColor="@color/accent"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"/>
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Initializing..."
+                android:textColor="@color/muted"
+                android:textSize="11sp"
+                android:fontFamily="monospace"/>
+        </LinearLayout>
+
+        <!-- ── Text Input Card ── -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="@color/card"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="INPUT TEXT"
+                    android:textColor="@color/accent"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.15"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="100dp"
+                    android:gravity="top"
+                    android:background="@null"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/muted"
+                    android:hint="Type or paste text to synthesize..."
+                    android:text="Hello! This is eSpeak NG running natively on Android via JNI. The engine converts text to speech using formant synthesis."
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── Language Selector ── -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="@color/card"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LANGUAGE / VOICE"
+                    android:textColor="@color/accent"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.15"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="8dp"/>
+
+                <Spinner
+                    android:id="@+id/spinnerLanguage"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/spinner_bg"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── Engine Parameters ── -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="@color/card"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ENGINE PARAMETERS"
+                    android:textColor="@color/accent"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.15"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Speed -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
+                    <TextView android:layout_width="60dp" android:layout_height="wrap_content" android:text="Speed" android:textColor="@color/muted" android:textSize="12sp" android:fontFamily="monospace"/>
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/sliderSpeed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:trackColorActive="@color/accent"
+                        app:trackColorInactive="@color/border"
+                        app:thumbColor="@color/accent"
+                        app:thumbRadius="10dp"/>
+                    <TextView android:id="@+id/tvSpeedVal" android:layout_width="36dp" android:layout_height="wrap_content" android:textColor="@color/accent" android:textSize="12sp" android:fontFamily="monospace" android:textAlignment="textEnd"/>
+                </LinearLayout>
+
+                <!-- Pitch -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
+                    <TextView android:layout_width="60dp" android:layout_height="wrap_content" android:text="Pitch" android:textColor="@color/muted" android:textSize="12sp" android:fontFamily="monospace"/>
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/sliderPitch"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:trackColorActive="@color/accent"
+                        app:trackColorInactive="@color/border"
+                        app:thumbColor="@color/accent"
+                        app:thumbRadius="10dp"/>
+                    <TextView android:id="@+id/tvPitchVal" android:layout_width="36dp" android:layout_height="wrap_content" android:textColor="@color/accent" android:textSize="12sp" android:fontFamily="monospace" android:textAlignment="textEnd"/>
+                </LinearLayout>
+
+                <!-- Volume -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+                    <TextView android:layout_width="60dp" android:layout_height="wrap_content" android:text="Volume" android:textColor="@color/muted" android:textSize="12sp" android:fontFamily="monospace"/>
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/sliderVolume"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:trackColorActive="@color/accent"
+                        app:trackColorInactive="@color/border"
+                        app:thumbColor="@color/accent"
+                        app:thumbRadius="10dp"/>
+                    <TextView android:id="@+id/tvVolumeVal" android:layout_width="36dp" android:layout_height="wrap_content" android:textColor="@color/accent" android:textSize="12sp" android:fontFamily="monospace" android:textAlignment="textEnd"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── Waveform Visualizer ── -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="@color/card"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <com.example.speakng.WaveformView
+                android:id="@+id/waveformView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── Action Buttons ── -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnSpeak"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="3"
+                android:layout_marginEnd="8dp"
+                android:text="▶  Speak"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.1"
+                android:backgroundTint="@color/accent"
+                android:textColor="@color/bg_dark"
+                app:cornerRadius="12dp"/>
+
+            <Button
+                android:id="@+id/btnStop"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="■"
+                android:textSize="16sp"
+                android:backgroundTint="@color/card"
+                android:textColor="@color/text_secondary"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                app:strokeColor="@color/border"
+                app:cornerRadius="12dp"/>
+
+        </LinearLayout>
+
+        <!-- Progress bar -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:layout_marginBottom="12dp"
+            android:progressTint="@color/accent"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+        <!-- ── Log Card ── -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/bg_terminal"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ENGINE LOG"
+                    android:textColor="@color/accent"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.15"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="6dp"/>
+
+                <ScrollView
+                    android:id="@+id/scrollLog"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp">
+
+                    <TextView
+                        android:id="@+id/tvLog"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/log_text"
+                        android:textSize="11sp"
+                        android:fontFamily="monospace"
+                        android:lineSpacingMultiplier="1.5"
+                        android:text=""/>
+                </ScrollView>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>
